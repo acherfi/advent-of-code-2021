@@ -1,8 +1,6 @@
 package me.abe.aoc2021
 
 import me.abe.readLines
-import kotlin.math.max
-import kotlin.math.min
 
 fun main() {
     val fileName = "day1.txt"
