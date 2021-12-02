@@ -46,7 +46,7 @@ class Submarine {
 }
 
 private fun processMovement(inputfileName: String, move: (String, Int) -> Unit) {
-    readLines(inputfileName).map {
+    readLines(inputfileName).forEach {
         val splitted = it.split(" ")
         move(splitted[0], splitted[1].toInt())
     }
