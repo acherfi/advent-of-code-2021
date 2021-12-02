@@ -13,7 +13,7 @@ fun main() {
 }
 
 
-fun part1(inputfileName: String): Int {
+private fun part1(inputfileName: String): Int {
     val inputVals = readLines(inputfileName).map { it.toInt() }
 
     var currentVal = inputVals[0]
@@ -27,7 +27,7 @@ fun part1(inputfileName: String): Int {
     return largerMeasurements
 }
 
-fun part2(inputfileName: String): Int {
+private fun part2(inputfileName: String): Int {
     val inputVals = readLines(inputfileName).map { it.toInt() }
     var largerMeasurements = 0
     var currentVal = aggregateNext3(inputVals, 0)
