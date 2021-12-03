@@ -1,7 +1,6 @@
 package me.abe.aoc2021
 
 import me.abe.readLines
-import java.text.FieldPosition
 
 fun main() {
     val fileName = "day3.txt"
