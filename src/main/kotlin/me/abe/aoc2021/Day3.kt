@@ -19,8 +19,6 @@ private fun part1(inputFileName: String): Int {
     return factors.first.toInt(radix = 2) * factors.second.toInt(radix = 2)
 }
 
-
-
 private fun part2(inputFileName: String): Int {
     val inputLines = readLines(inputFileName)
     val factors = computeFactors(inputLines)
@@ -30,9 +28,9 @@ private fun part2(inputFileName: String): Int {
     return ratingO2 * ratingCO2
 }
 
+
 private fun computeGamma(oneCounter: Int, numberOfLines: Int) =
     if (oneCounter >= numberOfLines - oneCounter) 1 else 0
-
 
 private fun computeFactors(inputLines: List<String>): Pair<String, String> {
     val lineSize = inputLines[0].length
@@ -47,7 +45,6 @@ private fun computeFactors(inputLines: List<String>): Pair<String, String> {
         gammaFactor += gamma.toString()
         epsilonFactor += (1 - gamma).toString()
     }
-
     return Pair(gammaFactor, epsilonFactor)
 }
 
@@ -61,7 +58,6 @@ private fun findRating(lines: List<String>, factors: Pair<String, String>, posit
         return findRating(filtredLines, computeFactors(filtredLines), position+1, mode)
     }
 }
-
 
 private fun getFactor(factors: Pair<String, String>, mode: String):String =
     when (mode){
