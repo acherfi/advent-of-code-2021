@@ -14,7 +14,6 @@ fun main() {
     println("Part 2 answer is : $p2")
 }
 
-
 private fun part1(inputFileName: String): Int {
     val groupedLines = createGroupedLines(readLines(inputFileName), "")
     val pool = BingoPool(groupedLines[0][0])
@@ -38,9 +37,7 @@ private fun part2(inputFileName: String): Int {
 }
 
 private fun computeAnswer(winnerGrid: BingoGrid, lastDrawnItem: String): Int {
-    return (winnerGrid.getUnmarkedItems()
-        .map { it.toInt() }
-        .reduce { acc, i -> acc + i }) * lastDrawnItem.toInt()
+    return winnerGrid.getUnmarkedItems().map(String::toInt).sum() * lastDrawnItem.toInt()
 }
 
 
@@ -50,7 +47,6 @@ class BingoPool(sequenceString: String) {
     private var index: Int = -1
 
     private fun fromString(sequenceString: String) = sequenceString.split(",")
-
 
     fun draw(): String {
         index++
@@ -66,12 +62,9 @@ class BingoGrid(gridLines: List<String>) {
     private val grid = fromStringList(gridLines)
     private val drawnGrid = initDrawnGrid()
 
-
     private fun fromStringList(gridLines: List<String>): List<List<String>> {
         val grid = arrayListOf<List<String>>()
-        gridLines.forEach {
-            grid.add(it.trim().split(" +".toRegex()))
-        }
+        gridLines.forEach { grid.add(it.trim().split(" +".toRegex())) }
         return grid
     }
 
@@ -82,23 +75,19 @@ class BingoGrid(gridLines: List<String>) {
         return drawnGrid
     }
 
-    private fun getPositionOrNull(item: String): Pair<Int, Int>? {
-        grid.forEachIndexed { i, line ->
-            line.forEachIndexed { j, it ->
-                if (it == item) return Pair(i, j)
-            }
-        }
-        return null
-    }
-
     // mark and return true if the the item exist
     fun markIfExist(item: String): Boolean {
-        val position = getPositionOrNull(item)
-        return if (position != null) {
-            drawnGrid[position.first][position.second] = true
-            true
-        } else false
+        grid.forEachIndexed { i, line ->
+            line.forEachIndexed { j, it ->
+                if (it == item) {
+                    drawnGrid[i][j] = true
+                    return true
+                }
+            }
+        }
+        return false
     }
+
 
     private fun getCompletedLineIndex(): Int {
         drawnGrid.forEachIndexed { i, line ->
@@ -113,9 +102,7 @@ class BingoGrid(gridLines: List<String>) {
 
         drawnGrid[0].forEachIndexed { j, _ ->
             var acc = true
-            drawnGrid.forEachIndexed { i, line ->
-                acc = (acc && line[j])
-            }
+            drawnGrid.forEachIndexed { i, line -> acc = (acc && line[j]) }
             if (acc) return j
         }
         return (-1)
@@ -150,15 +137,13 @@ class BingoGame(private val pool: BingoPool, private val grids: List<BingoGrid>)
         while (true) {
             val item = pool.draw()
             val uncompleteGrids = grids.filter { !it.isCompleted() }
-            uncompleteGrids
-                .forEach {
+            uncompleteGrids.forEach {
                     it.markIfExist(item)
                     grid = it
-                }
+            }
             if (uncompleteGrids.none { !it.isCompleted() }) return grid
         }
     }
-
 
     fun getLastDrawnItem() = pool.getLastDrawn()
 }
