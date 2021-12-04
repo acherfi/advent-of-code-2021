@@ -91,7 +91,7 @@ class BingoGrid(gridLines: List<String>) {
 
     private fun getCompletedLineIndex(): Int {
         drawnGrid.forEachIndexed { i, line ->
-            if (line.reduce { acc: Boolean, b: Boolean -> (acc && b) }) return i
+            if (line.all { it }) return i
         }
         return (-1)
     }
