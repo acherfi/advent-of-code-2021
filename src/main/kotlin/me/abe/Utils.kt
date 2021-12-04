@@ -13,3 +13,14 @@ fun readLines(inputFileName: String): List<String> {
 
     return lineList
 }
+
+fun createGroupedLines(lineList: List<String>, separator: String): List<List<String>> {
+    val entries = ArrayList<List<String>>()
+    var groupedLines = ArrayList<String>()
+    lineList.forEach { if(it != separator) groupedLines.add(it) else {
+        entries.add(groupedLines)
+        groupedLines = ArrayList<String>()
+    } }
+    if (groupedLines.size != 0) entries.add(groupedLines)
+    return entries
+}
