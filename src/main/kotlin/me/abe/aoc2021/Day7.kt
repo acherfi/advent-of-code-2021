@@ -19,8 +19,6 @@ fun main() {
             ) { x1, x2 -> getTrueMoveCost(x1, x2) }
         }"
     )
-
-
 }
 
 fun getOptimalPosition(
