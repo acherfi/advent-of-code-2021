@@ -25,82 +25,72 @@ fun main() {
 
 
 class DigitRecognitor(private val list: List<String>) {
-    private val digitMap = HashMap<Int, Set<Char>>()
+    private val digitMap = hashMapOf<Int, Set<Char>>()
 
     fun find(digit: Int): Set<Char> {
         when {
             digitMap[digit] != null -> return digitMap[digit]!!
             digit == 1 -> {
-                val set = list.find { it.length == 2 }!!.toSet()
-                digitMap[digit] = set
-                return set
+                digitMap[digit] = list.find { it.length == 2 }!!.toSet()
+                return digitMap[digit]!!
             }
             digit == 7 -> {
-                val set = list.find { it.length == 3 }!!.toSet()
-                digitMap[digit] = set
-                return set
+                digitMap[digit] = list.find { it.length == 3 }!!.toSet()
+                return digitMap[digit]!!
             }
             digit == 4 -> {
-                val set = list.find { it.length == 4 }!!.toSet()
-                digitMap[digit] = set
-                return set
+                digitMap[digit] = list.find { it.length == 4 }!!.toSet()
+                return digitMap[digit]!!
             }
             digit == 8 -> {
-                val set = list.find { it.length == 7 }!!.toSet()
-                digitMap[digit] = set
-                return set
+                digitMap[digit] = list.find { it.length == 7 }!!.toSet()
+                return digitMap[digit]!!
             }
             digit == 9 -> {
                 val set4 = find(4)
                 val topChar: Char = findTopBar()
-                val set =
+                digitMap[digit] =
                     list.find { it.length == 6 && it.toSet().containsAll(set4) && it.contains(topChar) }!!.toSet()
-                digitMap[digit] = set
-                return set
+                return digitMap[digit]!!
             }
             digit == 5 -> {
                 val set9 = find(9)
                 val set1 = find(1)
-                val set =
+                digitMap[digit] =
                     list.find { it.length == 5 && set9.containsAll(it.toSet()) && !it.toSet().containsAll(set1) }!!
                         .toSet()
-                digitMap[digit] = set
-                return set
+                return digitMap[digit]!!
             }
             digit == 3 -> {
                 val set9 = find(9)
                 val set1 = find(1)
-                val set =
+                digitMap[digit] =
                     list.find { it.length == 5 && set9.containsAll(it.toSet()) && it.toSet().containsAll(set1) }!!
                         .toSet()
-                digitMap[digit] = set
-                return set
+                return digitMap[digit]!!
             }
             digit == 6 -> {
                 val set1 = find(1)
-                val set =
+                digitMap[digit] =
                     list.find { it.length == 6 && !it.toSet().containsAll(set1) }!!
                         .toSet()
-                digitMap[digit] = set
-                return set
+                return digitMap[digit]!!
             }
             digit == 0 -> {
                 val set9 = find(9)
                 val set6 = find(6)
-                val set =
+                digitMap[digit] =
                     list.find { it.length == 6 && !set9.containsAll(it.toSet()) && !set6.containsAll(it.toSet()) }!!
                         .toSet()
-                digitMap[digit] = set
-                return set
+                return digitMap[digit]!!
             }
             digit == 2 -> {
                 val set5 = find(5)
                 val set3 = find(3)
-                val set =
+                digitMap[digit] =
                     list.find { it.length == 5 && !set5.containsAll(it.toSet()) && !set3.containsAll(it.toSet()) }!!
                         .toSet()
-                digitMap[digit] = set
-                return set
+                return digitMap[digit]!!
             }
             else -> return setOf()
         }
